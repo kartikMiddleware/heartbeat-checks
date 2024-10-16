@@ -7,13 +7,13 @@
 - All the checks will have period and grace time.
 - Period is the interval to ping the check, and if the check do not receive the ping in the period time then it will wait until grace time elapsed.
 
-## Check status
+### Check status
 There are 5 types of status of the heartbeat check.
 - `new`     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -> when the check is created
-- `up`      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -> when it was being pinged successfully (The last "success" signal has arrived on time)
+- `up`      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -> when it was being pinged successfully (The last "success" signal has arrived on time)
 - `late`    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -> The "success" signal is due but has not arrived yet. It is not yet late by more than the check's configured Grace Time
 - `down`    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -> the "success" signal has not arrived yet, and grace time has elapsed, alert message via the configured integration will be sent
-- `paused`   &nbsp; -> If you manually paused the heartbeat check, status will be set to paused
+- `paused`  &nbsp;&nbsp; -> If you manually paused the heartbeat check, status will be set to paused
 
 
 ### Heartbeat check alert
@@ -43,25 +43,25 @@ There are 5 types of status of the heartbeat check.
 | Start (UUID)                                | https://mw.com/<{{uuid}}>/start             |
 | Failure (UUID)                              | https://mw.com/<{{uuid}}>/fail              |
 | Log (UUID)                                  | https://mw.com/<{{uuid}}>/log               |
-| Report script's exit status (UUID)          | https://mw.com/<{{uuid}}>/<exit-status>     |
+| Report script's exit status (UUID)          | https://mw.com/<{{uuid}}>/<{{exit-status}}>     |
 
 #### Send a "success" Signal Using UUID
-```http
+```
 HEAD|GET|POST https://mw.com/<{{uuid}}>
 ```
 Signals that the job has been completed successfully (or a continuously running process is still running and healthy).
 
 identifies the check by the UUID value included in the URL.
 
-Response Codes
-200 OK
-The request was understood and added to processing queue.
-404 (not found)
-Could not find a check with the specified UUID.
-429 (rate limited)
-Rate limit exceeded, request was ignored. Please do not ping a single check more than 5 times per minute.
-400 invalid url format
-The URL does not match the expected format.
+Response Codes<br>
+200 OK<br>
+The request was understood and added to processing queue.<br>
+404 (not found)<br>
+Could not find a check with the specified UUID.<br>
+429 (rate limited)<br>
+Rate limit exceeded, request was ignored. Please do not ping a single check more than 5 times per minute.<br>
+400 invalid url format<br>
+The URL does not match the expected format.<br>
 Example
 ```
 GET /5bf66975-d4c7-4bf5-bcc8-b8d8a82ea278 HTTP/1.0
@@ -79,7 +79,7 @@ OK
 ```
 
 #### Send a "start" Signal Using UUID
-```http
+```
 HEAD|GET|POST https://mw.com/<{{uuid}}>/start
 ```
 Sends a "job has started!" message to middleware.io. Sending a "start" signal is optional, but it enables a few extra features:
@@ -88,15 +88,15 @@ We will measure and display job execution times.<br>
 We will detect if the job runs longer than its configured grace time<br>
 We identifies the check by the UUID value included in the URL.<br>
 
-Response Codes
-200 OK
-The request was understood and added to processing queue.
-404 (not found)
-Could not find a check with the specified UUID.
-429 (rate limited)
-Rate limit exceeded, request was ignored. Please do not ping a single check more than 5 times per minute.
-400 invalid url format
-The URL does not match the expected format.
+Response Codes<br>
+200 OK<br>
+The request was understood and added to processing queue.<br>
+404 (not found)<br>
+Could not find a check with the specified UUID.<br>
+429 (rate limited)<br>
+Rate limit exceeded, request was ignored. Please do not ping a single check more than 5 times per minute.<br>
+400 invalid url format<br>
+The URL does not match the expected format.<br>
 Example
 
 ```
@@ -115,22 +115,22 @@ OK
 ```
 
 #### Send a "failure" Signal Using UUID
-```http
+```
 HEAD|GET|POST https://mw.com/<{{uuid}}>/fail
 ```
 Signals that the job has failed. Actively signaling a failure minimizes the delay from your monitored service failing to you receiving an alert.
 
 We identifies the check by the UUID value included in the URL.
 
-Response Codes
-200 OK
-The success signal was recorded.
-404 (not found)
-Could not find a check with the specified UUID.
-429 (rate limited)
-Rate limit exceeded, request was ignored. Please do not ping a single check more than 5 times per minute.
-400 invalid url format
-The URL does not match the expected format.
+Response Codes<br>
+200 OK<br>
+The success signal was recorded.<br>
+404 (not found)<br>
+Could not find a check with the specified UUID.<br>
+429 (rate limited)<br>
+Rate limit exceeded, request was ignored. Please do not ping a single check more than 5 times per minute.<br>
+400 invalid url format<br>
+The URL does not match the expected format.<br>
 Example
 
 ```
@@ -156,15 +156,15 @@ Sends a success or failure signal depending on the exit status included in the U
 
 We identifies the check by the UUID value included in the URL.
 
-Response Codes
-200 OK
-The request was understood and added to the processing queue.
-404 (not found)
-Could not find a check with the specified UUID.
-429 (rate limited)
-Rate limit exceeded, request was ignored. Please do not ping a single check more than 5 times per minute.
-400 invalid url format
-The URL does not match the expected format.
+Response Codes<br>
+200 OK<br>
+The request was understood and added to the processing queue.<br>
+404 (not found)<br>
+Could not find a check with the specified UUID.<br>
+429 (rate limited)<br>
+Rate limit exceeded, request was ignored. Please do not ping a single check more than 5 times per minute.<br>
+400 invalid url format<br>
+The URL does not match the expected format.<br>
 Example
 
 ```
