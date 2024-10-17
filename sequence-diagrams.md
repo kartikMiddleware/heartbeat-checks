@@ -3,6 +3,7 @@
 ### Creation of heartbeat check(success scenario)
 <!--
 @startuml 01_hb_creation
+skinparam theme toy
 title Creation of heartbeat check(success scenario)
 actor User
 participant "Web UI"
@@ -28,6 +29,7 @@ Bifrost -> "Web UI" : return success msg
 ### Ping the heartbeat endpoint(success ping scenario)
 <!--
 @startuml 02_success_ping
+skinparam theme toy
 title Ping the heartbeat endpoint(success ping scenario)
 actor User
 participant "Web UI"
@@ -59,6 +61,7 @@ Bifrost -> "Web UI" : Send the updated check and check events
 ### Ping the heartbeat endpoint(success alert notification scenario)
 <!--
 @startuml 03_success_alert
+skinparam theme toy
 title Ping the heartbeat endpoint(success alert notification scenario)
 actor User
 participant "Web UI"
