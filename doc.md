@@ -43,7 +43,7 @@ There are 5 types of status of the heartbeat check.
 | Start (UUID)                                | https://mw.com/<{{uuid}}>/start             |
 | Failure (UUID)                              | https://mw.com/<{{uuid}}>/fail              |
 | Log (UUID)                                  | https://mw.com/<{{uuid}}>/log               |
-| Report script's exit status (UUID)          | https://mw.com/<{{uuid}}>/<{{exit-status}}>     |
+| Report script's exit status (UUID)          | https://mw.com/<{{uuid}}>/<{{exit-status}}> |
 
 #### Send a "success" Signal Using UUID
 ```
