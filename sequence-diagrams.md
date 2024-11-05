@@ -82,5 +82,7 @@ Service -> "Heartbeat-Server" : Ping the HB Server
 ![](03_success_alert.svg)
 
 
+<!--
 // Event (#PING_COUNT | TIMESTAMP | PING_SOURCE | USER_AGENT)
 // Event (TIMESTAMP | OLD_STATUS | NEW_STATUS)
+-->
