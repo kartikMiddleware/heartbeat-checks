@@ -18,6 +18,15 @@
 ```
 
 ```go
+// Response for all the api calls
+type Response struct {
+	Status      bool   `json:"status"`
+	Message     string `json:"message"`
+	Items       any    `json:"items"`
+	PulsarError string `json:"pulsar_error,omitempty"`
+}
+
+// HeartbeatRequest type is for create and update check
 type HeartbeatRequest struct {
 	SlugName       string `json:"slug_name"`
 	IntervalSec    *int   `json:"interval_sec"`
