@@ -11,10 +11,26 @@
 #### APIs
 ```
 - CreateCheck  [POST]   /api/v1/heartbeat
+	REQUEST_BODY=HeartbeatRequest 
+	STATUS_CODE=201 
+	RESPONSE={"status":true,"message":"heartbeat check {{slug_name}} created successfully","items":{1:HeartbeatCheck}}
+
 - GetCheck     [GET]    /api/v1/heartbeat/:id
+	PARAMS=id=checkId
+	STATUS_CODE=200 
+	RESPONSE={"status":true,"message":"check fetched successfully","items":{1:HeartbeatCheck}}
+
 - GetAllChecks [GET]    /api/v1/heartbeat
+	STATUS_CODE=200 
+	RESPONSE={"status":true,"message":"checks fetched successfully","items":{15:HeartbeatCheck,12:HeartbeatCheck,10:HeartbeatCheck,4:HeartbeatCheck}}
+
 - UpdateCheck  [PUT]    /api/v1/heartbeat/:id
+	STATUS_CODE=200 
+	RESPONSE={"status":true,"message":"heartbeat check {{slug_name}} updated successfully"}
+
 - DeleteCheck  [DELETE] /api/v1/heartbeat/:id
+	STATUS_CODE=200 
+	RESPONSE={"status":true,"message":"heartbeat monitor {{slug_name}} deleted successfully"}
 ```
 
 ```go
