@@ -14,7 +14,7 @@
 	REQUEST_BODY=HeartbeatRequest 
 	STATUS_CODE=201 
 	RESPONSE={"status":true,"message":"heartbeat check {{slug_name}} created successfully","items":{1:HeartbeatCheck}}
-
+	- After creating check, It will send message to pulsar that check is created (for heartbeat service)
 - GetCheck     [GET]    /api/v1/heartbeat/:id
 	PARAMS=id=checkId
 	STATUS_CODE=200 
@@ -27,10 +27,13 @@
 - UpdateCheck  [PUT]    /api/v1/heartbeat/:id
 	STATUS_CODE=200 
 	RESPONSE={"status":true,"message":"heartbeat check {{slug_name}} updated successfully"}
+		- After updating check, It will send message to pulsar that check is updated (for heartbeat service)
 
 - DeleteCheck  [DELETE] /api/v1/heartbeat/:id
 	STATUS_CODE=200 
 	RESPONSE={"status":true,"message":"heartbeat monitor {{slug_name}} deleted successfully"}
+		- After deleting check, It will send message to pulsar that check is deleted (for heartbeat service)
+	
 ```
 
 ```go
@@ -72,12 +75,26 @@ type HeartbeatCheck struct {
 ```
 
 ### Heartbeat-server(public)
-- Handle pings from various cron jobs
-- Handle rate-limiting
+- Handle pings from various cron jobs (single http/s endpoint)
+- Handle rate-limiting (type is yet to be desided)
 - Validate the request(using exposed apis from App-api)
 - Send check details to pulsar
+```
+- It will get UUID from url.
+- Call api /api/v1/heartbeat/verify/:uuid to validate and get check detail
+- send check details to pulsar
+```
 
 ### Heartbeat-service
 - Continously running and getting msg from pulsar
 - Actual logic of heartbeat monitoring
 - Responsible for updating postgres and clickhouse
+
+```
+- Get check details from pulsar
+- Create Ping Event and store in clickhouse
+- Update check details in postgres
+
+
+- It will continuously waiting for ping for each check, if they come in time then update the check status (in postgres) accordingly.
+```
